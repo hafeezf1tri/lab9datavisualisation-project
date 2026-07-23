@@ -1,0 +1,244 @@
+{
+  "source_row_count": 7668,
+  "cleaned_row_count": 7668,
+  "exact_duplicates_removed": 0,
+  "invalid_values_converted_to_missing": {
+    "budget_non_numeric": 0,
+    "gross_non_numeric": 0,
+    "score_non_numeric": 0,
+    "votes_non_numeric": 0,
+    "runtime_non_numeric": 0,
+    "year_non_numeric": 0,
+    "budget_non_positive": 0,
+    "gross_non_positive": 0,
+    "runtime_non_positive": 0,
+    "score_out_of_range": 0,
+    "votes_negative": 0
+  },
+  "budget_band_edges": [
+    3000.0,
+    10000000.0,
+    20500000.0,
+    45000000.0,
+    356000000.0
+  ],
+  "anomaly_thresholds": {
+    "budget_q25": 10000000.0,
+    "budget_q75": 45000000.0,
+    "roi_q75": 267.13631066666665
+  },
+  "suspected_duplicate_count": 0,
+  "missing_by_column": {
+    "source_row_number": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "name": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "rating": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "genre": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "year": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "released": {
+      "count": 2,
+      "percentage": 0.03
+    },
+    "score": {
+      "count": 3,
+      "percentage": 0.04
+    },
+    "votes": {
+      "count": 3,
+      "percentage": 0.04
+    },
+    "director": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "writer": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "star": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "country": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "budget": {
+      "count": 2171,
+      "percentage": 28.31
+    },
+    "gross": {
+      "count": 189,
+      "percentage": 2.46
+    },
+    "company": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "runtime": {
+      "count": 4,
+      "percentage": 0.05
+    },
+    "genre_was_missing": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "rating_was_missing": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "country_was_missing": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "company_was_missing": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "director_was_missing": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "writer_was_missing": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "star_was_missing": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "released_date": {
+      "count": 2,
+      "percentage": 0.03
+    },
+    "date_parse_failed": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "release_year": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "suspected_duplicate": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "movie_id": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "has_valid_budget": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "has_valid_gross": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "has_valid_financials": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "estimated_profit": {
+      "count": 2232,
+      "percentage": 29.11
+    },
+    "roi_pct": {
+      "count": 2232,
+      "percentage": 29.11
+    },
+    "gross_budget_ratio": {
+      "count": 2232,
+      "percentage": 29.11
+    },
+    "is_profitable": {
+      "count": 2232,
+      "percentage": 29.11
+    },
+    "release_decade": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "release_month": {
+      "count": 2,
+      "percentage": 0.03
+    },
+    "release_month_name": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "release_period_label": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "score_band": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "budget_band": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "performance_category": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "anomaly_category": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "budget_outlier": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "gross_outlier": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "estimated_profit_outlier": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "roi_pct_outlier": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "runtime_outlier": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "votes_outlier": {
+      "count": 0,
+      "percentage": 0.0
+    }
+  },
+  "failed_date_parses": 0,
+  "valid_budget_count": 5497,
+  "valid_gross_count": 7479,
+  "valid_budget_and_gross_count": 5436,
+  "outlier_count_by_measure": {
+    "budget": 445,
+    "gross": 851,
+    "estimated_profit": 591,
+    "roi_pct": 438,
+    "runtime": 240,
+    "votes": 803
+  },
+  "minimum_release_year": 1980,
+  "maximum_release_year": 2020,
+  "preparation_timestamp": "2026-07-23T07:20:24.344514+00:00"
+}

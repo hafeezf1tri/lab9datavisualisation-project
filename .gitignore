@@ -6,7 +6,11 @@ __pycache__/
 .ruff_cache/
 .streamlit/secrets.toml
 data/raw/*.csv
+movies.csv
 data/processed/*
 !data/processed/.gitkeep
+!data/processed/movies_clean.parquet
+!data/processed/data_quality_summary.json
+!data/processed/insight_evidence.json
 *.log
 .DS_Store
