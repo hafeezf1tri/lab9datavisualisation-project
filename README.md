@@ -5,6 +5,12 @@ movie performance by genre, company, director, country, rating, and release peri
 It connects executive KPIs to relationship, distribution, geographic, temporal,
 hierarchical, and movie-level investigation views.
 
+## Live deployment
+
+The dashboard is live at:
+
+- https://lab9datavisualisation-project-latz87taogthda94kt7teq.streamlit.app/Exploratory_Analysis
+
 ## Dashboard screenshots
 
 ### Application home
