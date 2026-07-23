@@ -9,7 +9,7 @@ hierarchical, and movie-level investigation views.
 
 The dashboard is live at:
 
-- https://lab9datavisualisation-project-latz87taogthda94kt7teq.streamlit.app/Exploratory_Analysis
+- https://lab9datavisualisation-project-latz87taogthda94kt7teq.streamlit.app
 
 ## Dashboard screenshots
 
