@@ -5,8 +5,23 @@ movie performance by genre, company, director, country, rating, and release peri
 It connects executive KPIs to relationship, distribution, geographic, temporal,
 hierarchical, and movie-level investigation views.
 
-> Screenshot placeholder: run the application, capture each of the three views,
-> and add the images to `docs/screenshots/` before final submission.
+## Dashboard screenshots
+
+### Application home
+
+![Movie Industry Dashboard home page](docs/screenshots/frontapppage.png)
+
+### Executive Overview
+
+![Executive Overview dashboard](docs/screenshots/executiveoverview.png)
+
+### Exploratory Analysis
+
+![Exploratory Analysis dashboard](docs/screenshots/EDA.png)
+
+### Detailed Investigation
+
+![Detailed Investigation dashboard](docs/screenshots/investigation.png)
 
 ## Dataset
 
