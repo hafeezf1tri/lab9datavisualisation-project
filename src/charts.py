@@ -6,7 +6,19 @@ import plotly.express as px
 import plotly.graph_objects as go
 import pycountry
 
-from src.config import COLOR_SEQUENCE, COUNTRY_OVERRIDES, GENERAL_MIN_GROUP_SIZE, PLOTLY_TEMPLATE
+from src.config import (
+    COLOR_SEQUENCE,
+    CONTINUOUS_SCALE,
+    COUNTRY_OVERRIDES,
+    DIVERGING_SCALE,
+    GALAXY,
+    GENERAL_MIN_GROUP_SIZE,
+    MILKY_WAY,
+    PLOTLY_TEMPLATE,
+    SKY,
+    UNIVERSE,
+    VENUS,
+)
 from src.metrics import grouped_metrics
 
 
@@ -101,13 +113,17 @@ def genre_decade_heatmap(frame: pd.DataFrame, metric: str):
         data.loc[data["valid_financial_count"].lt(GENERAL_MIN_GROUP_SIZE), "value"] = np.nan
     data["decade"] = data["release_decade"].astype(int).astype(str) + "s"
     selection = alt.selection_point(fields=["genre", "decade"], name="heat_select")
-    return (
+    chart = (
         alt.Chart(data)
         .mark_rect()
         .encode(
             x=alt.X("decade:N", title="Release decade"),
             y=alt.Y("genre:N", title="Genre"),
-            color=alt.Color("value:Q", scale=alt.Scale(scheme="blueorange"), title=metric.replace("_", " ")),
+            color=alt.Color(
+                "value:Q",
+                scale=alt.Scale(range=CONTINUOUS_SCALE),
+                title=metric.replace("_", " "),
+            ),
             tooltip=[
                 "genre:N",
                 "decade:N",
@@ -120,6 +136,7 @@ def genre_decade_heatmap(frame: pd.DataFrame, metric: str):
         .add_params(selection)
         .properties(title="Genre by decade heatmap", height=max(280, data["genre"].nunique() * 24))
     )
+    return _style_altair(chart)
 
 
 def country_iso(name: str) -> str | None:
@@ -138,7 +155,7 @@ def country_map(frame: pd.DataFrame, metric: str) -> go.Figure:
     fig = px.choropleth(
         data, locations="iso3", color=metric, hover_name="country",
         custom_data=["country", "movie_count", "valid_financial_count"],
-        color_continuous_scale="Blues", template=PLOTLY_TEMPLATE,
+        color_continuous_scale=CONTINUOUS_SCALE, template=PLOTLY_TEMPLATE,
         title="Production country", labels={metric: metric.replace("_", " ").title()},
     )
     fig.update_traces(
@@ -160,9 +177,12 @@ def small_multiples(frame: pd.DataFrame, metric: str):
     ).reset_index()
     if metric == "median_roi":
         data.loc[data["valid_financial_count"].lt(GENERAL_MIN_GROUP_SIZE), metric] = np.nan
-    return (
+    chart = (
         alt.Chart(data)
-        .mark_line(point=True)
+        .mark_line(
+            color=VENUS,
+            point={"filled": True, "fill": SKY, "stroke": UNIVERSE},
+        )
         .encode(
             x=alt.X("release_year:Q", title="Year"),
             y=alt.Y(f"{metric}:Q", title=metric.replace("_", " ")),
@@ -171,13 +191,14 @@ def small_multiples(frame: pd.DataFrame, metric: str):
         .facet("genre:N", columns=3, title="Top-six genre trends")
         .resolve_scale(y="shared")
     )
+    return _style_altair(chart)
 
 
 def performance_treemap(frame: pd.DataFrame) -> go.Figure:
     data = frame.loc[frame["gross"].notna() & frame["genre"].ne("Unknown") & frame["company"].ne("Unknown")].copy()
     return px.treemap(
         data, path=["genre", "company", "name"], values="gross", color="roi_pct",
-        color_continuous_scale="RdBu", color_continuous_midpoint=0,
+        color_continuous_scale=DIVERGING_SCALE, color_continuous_midpoint=0,
         custom_data=["movie_id", "genre", "company", "name"],
         template=PLOTLY_TEMPLATE, title="Gross hierarchy: genre → company → movie",
     )
@@ -217,4 +238,27 @@ def movie_comparison(frame: pd.DataFrame, movie_id: str) -> go.Figure:
         color_discrete_sequence=COLOR_SEQUENCE, template=PLOTLY_TEMPLATE,
         labels={"value": "Percentile within genre", "measure": "Measure"},
         title="Selected movie percentile versus genre median",
+    )
+
+
+def _style_altair(chart):
+    return (
+        chart.configure(background=GALAXY)
+        .configure_axis(
+            domainColor=UNIVERSE,
+            gridColor=UNIVERSE,
+            gridOpacity=0.24,
+            labelColor=MILKY_WAY,
+            tickColor=UNIVERSE,
+            titleColor=SKY,
+        )
+        .configure_header(labelColor=MILKY_WAY, titleColor=SKY)
+        .configure_legend(
+            labelColor=MILKY_WAY,
+            titleColor=SKY,
+            strokeColor=UNIVERSE,
+            fillColor=GALAXY,
+        )
+        .configure_title(color=MILKY_WAY)
+        .configure_view(stroke=UNIVERSE)
     )

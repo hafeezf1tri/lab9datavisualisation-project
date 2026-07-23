@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import pandas as pd
 import streamlit as st
 
-from src.config import CLEAN_DATA_PATH
+from src.config import APP_CSS, CLEAN_DATA_PATH
 from src.data_loader import load_movies, load_quality
 from src.filters import apply_filters
 from src.state import selections
@@ -27,6 +27,7 @@ def configure_page(title: str) -> None:
         page_title=f"{title} · Movie Industry Dashboard",
         page_icon="🎬", layout="wide",
     )
+    st.markdown(APP_CSS, unsafe_allow_html=True)
 
 
 def get_context() -> AppContext | None:

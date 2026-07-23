@@ -67,6 +67,19 @@ rankings show companies within the genre, and the linked detail table updates.
 Selecting a country follows the same state route. Stable fallback controls are
 provided for critical chart interactions.
 
+## Visual theme
+
+The dashboard uses a space-inspired dark palette consistently across Streamlit
+controls and both chart libraries:
+
+- **Venus** `#BAD6EB` — primary highlights, borders, and gradient lead
+- **Galaxy** `#081F5C` — deep background
+- **Universe** `#7096D1` — secondary accent and gradient midpoint
+- **Planetary** `#334EAC` — gradient tail and buttons
+- **Milky Way** `#FFF9F0` — foreground text
+- **Sky** `#D0E3FF` — supporting highlights
+- **Meteor** `#F7F2EB` — light neutral
+
 ## Metric definitions
 
 - **Valid budget/gross:** non-null and strictly positive. Zero is treated as
