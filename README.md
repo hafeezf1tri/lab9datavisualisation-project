@@ -84,8 +84,8 @@ provided for critical chart interactions.
 
 ## Visual theme
 
-The dashboard uses a space-inspired dark palette consistently across Streamlit
-controls and both chart libraries:
+The dashboard uses a space-inspired dark palette for its application shell,
+navigation, controls, buttons, and KPI cards:
 
 - **Venus** `#BAD6EB` — primary highlights, borders, and gradient lead
 - **Galaxy** `#081F5C` — deep background
@@ -94,6 +94,12 @@ controls and both chart libraries:
 - **Milky Way** `#FFF9F0` — foreground text
 - **Sky** `#D0E3FF` — supporting highlights
 - **Meteor** `#F7F2EB` — light neutral
+
+Analytical marks intentionally use a separate colour system for clarity. Category
+series use a high-contrast colour-blind-friendly palette, continuous measures use
+Viridis, and ROI/profit comparisons use an orange-neutral-blue diverging scale.
+This separation preserves the application aesthetic without making chart groups
+difficult to distinguish.
 
 ## Metric definitions
 

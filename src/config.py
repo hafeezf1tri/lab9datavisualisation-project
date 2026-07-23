@@ -27,9 +27,30 @@ MILKY_WAY = "#FFF9F0"
 SKY = "#D0E3FF"
 METEOR = "#F7F2EB"
 
-COLOR_SEQUENCE = [UNIVERSE, VENUS, PLANETARY, SKY, METEOR]
-CONTINUOUS_SCALE = [PLANETARY, UNIVERSE, VENUS, SKY]
-DIVERGING_SCALE = [PLANETARY, UNIVERSE, GALAXY, VENUS, SKY]
+# Charts deliberately use a separate analytical palette. These colours provide
+# stronger category separation than the monochromatic application theme.
+COLOR_SEQUENCE = [
+    "#E69F00",  # orange
+    "#56B4E9",  # sky blue
+    "#009E73",  # bluish green
+    "#F0E442",  # yellow
+    "#CC79A7",  # reddish purple
+    "#D55E00",  # vermillion
+    "#0072B2",  # blue
+    "#8DD3C7",  # mint
+    "#FB8072",  # coral
+    "#B3DE69",  # yellow green
+    "#FDB462",  # amber
+    "#80B1D3",  # light blue
+    "#BC80BD",  # purple
+    "#FCCDE5",  # pink
+    "#FFED6F",  # pale yellow
+    "#BEBADA",  # lavender
+]
+DEFAULT_MARK_COLOR = "#56B4E9"
+SELECTED_MARK_COLOR = "#F0E442"
+CONTINUOUS_SCALE = ["#440154", "#3B528B", "#21918C", "#5EC962", "#FDE725"]
+DIVERGING_SCALE = ["#D55E00", "#F7F2EB", "#56B4E9"]
 PLOTLY_TEMPLATE = {
     "layout": {
         "paper_bgcolor": GALAXY,

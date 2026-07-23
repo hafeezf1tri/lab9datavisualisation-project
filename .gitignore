@@ -6,7 +6,6 @@ __pycache__/
 .ruff_cache/
 .streamlit/secrets.toml
 data/raw/*.csv
-movies.csv
 data/processed/*
 !data/processed/.gitkeep
 !data/processed/movies_clean.parquet

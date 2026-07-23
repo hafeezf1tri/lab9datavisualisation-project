@@ -10,14 +10,15 @@ from src.config import (
     COLOR_SEQUENCE,
     CONTINUOUS_SCALE,
     COUNTRY_OVERRIDES,
+    DEFAULT_MARK_COLOR,
     DIVERGING_SCALE,
     GALAXY,
     GENERAL_MIN_GROUP_SIZE,
     MILKY_WAY,
     PLOTLY_TEMPLATE,
+    SELECTED_MARK_COLOR,
     SKY,
     UNIVERSE,
-    VENUS,
 )
 from src.metrics import grouped_metrics
 
@@ -36,7 +37,7 @@ def annual_trend(frame: pd.DataFrame, metric: str) -> go.Figure:
         grouped, x="release_year", y=metric, markers=True,
         hover_data={"movie_count": True, "valid_financial_count": True},
         labels={"release_year": "Release year", metric: labels[metric]},
-        color_discrete_sequence=[COLOR_SEQUENCE[0]], template=PLOTLY_TEMPLATE,
+        color_discrete_sequence=[DEFAULT_MARK_COLOR], template=PLOTLY_TEMPLATE,
     )
     fig.update_layout(title=f"Annual {labels[metric].lower()}", hovermode="x unified")
     return fig
@@ -44,7 +45,10 @@ def annual_trend(frame: pd.DataFrame, metric: str) -> go.Figure:
 
 def genre_bar(frame: pd.DataFrame, metric: str, selected: str | None = None) -> go.Figure:
     data = grouped_metrics(frame, "genre").dropna(subset=[metric]).sort_values(metric)
-    colors = [COLOR_SEQUENCE[1] if g == selected else COLOR_SEQUENCE[0] for g in data["genre"]]
+    colors = [
+        SELECTED_MARK_COLOR if genre == selected else DEFAULT_MARK_COLOR
+        for genre in data["genre"]
+    ]
     fig = go.Figure(go.Bar(
         x=data[metric], y=data["genre"], orientation="h", marker_color=colors,
         customdata=np.stack([data["genre"], data["movie_count"], data["valid_financial_count"]], axis=-1)
@@ -66,6 +70,10 @@ def budget_gross_scatter(frame: pd.DataFrame) -> go.Figure:
         labels={"budget": "Budget (USD, log)", "gross": "Gross (USD, log)"},
     )
     fig.update_traces(
+        marker={
+            "opacity": 0.78,
+            "line": {"width": 0.45, "color": "rgba(255,249,240,0.72)"},
+        },
         hovertemplate="<b>%{customdata[1]}</b><br>Budget: $%{x:,.0f}<br>Gross: $%{y:,.0f}"
         "<br>Company: %{customdata[2]}<br>Estimated profit: $%{customdata[3]:,.0f}"
         "<br>ROI: %{customdata[4]:,.1f}%<br>Score: %{customdata[5]:.1f}"
@@ -85,13 +93,19 @@ def roi_box(frame: pd.DataFrame, include_extremes: bool) -> go.Figure:
     else:
         data["display_roi"] = data["roi_pct"]
     order = data.groupby("genre")["roi_pct"].median().sort_values().index.tolist()
-    return px.box(
+    fig = px.box(
         data, x="genre", y="display_roi", category_orders={"genre": order},
         custom_data=["name", "roi_pct", "movie_id"], points="outliers" if include_extremes else False,
         color="genre", color_discrete_sequence=COLOR_SEQUENCE, template=PLOTLY_TEMPLATE,
         labels={"display_roi": "ROI (%)", "genre": "Genre"},
         title="ROI distribution by genre",
     )
+    fig.update_traces(
+        opacity=0.82,
+        line={"width": 1.7},
+        marker={"line": {"width": 0.7, "color": "rgba(255,249,240,0.72)"}},
+    )
+    return fig
 
 
 def genre_decade_heatmap(frame: pd.DataFrame, metric: str):
@@ -121,7 +135,7 @@ def genre_decade_heatmap(frame: pd.DataFrame, metric: str):
             y=alt.Y("genre:N", title="Genre"),
             color=alt.Color(
                 "value:Q",
-                scale=alt.Scale(range=CONTINUOUS_SCALE),
+                scale=alt.Scale(scheme="viridis"),
                 title=metric.replace("_", " "),
             ),
             tooltip=[
@@ -180,8 +194,12 @@ def small_multiples(frame: pd.DataFrame, metric: str):
     chart = (
         alt.Chart(data)
         .mark_line(
-            color=VENUS,
-            point={"filled": True, "fill": SKY, "stroke": UNIVERSE},
+            color=DEFAULT_MARK_COLOR,
+            point={
+                "filled": True,
+                "fill": SELECTED_MARK_COLOR,
+                "stroke": MILKY_WAY,
+            },
         )
         .encode(
             x=alt.X("release_year:Q", title="Year"),
@@ -207,7 +225,10 @@ def performance_treemap(frame: pd.DataFrame) -> go.Figure:
 def company_ranking(frame: pd.DataFrame, selected: str | None = None) -> go.Figure:
     data = grouped_metrics(frame, "company").dropna(subset=["median_roi"])
     data = data.nlargest(20, "total_gross").sort_values("total_gross")
-    colors = [COLOR_SEQUENCE[1] if x == selected else COLOR_SEQUENCE[0] for x in data["company"]]
+    colors = [
+        SELECTED_MARK_COLOR if company == selected else DEFAULT_MARK_COLOR
+        for company in data["company"]
+    ]
     fig = go.Figure(go.Bar(
         x=data["total_gross"], y=data["company"], orientation="h", marker_color=colors,
         customdata=np.stack([data["company"], data["movie_count"], data["median_roi"]], axis=-1)
