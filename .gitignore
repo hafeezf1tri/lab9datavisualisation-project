@@ -8,6 +8,5 @@ __pycache__/
 data/raw/*.csv
 data/processed/*
 !data/processed/.gitkeep
-movies.csv
 *.log
 .DS_Store
